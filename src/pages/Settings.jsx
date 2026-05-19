@@ -240,7 +240,7 @@ export default function CSVParser() {
       Currently using: <span className="text-[#FF6B00] font-bold">{currency.symbol} {currency.name}</span>
     </p>
   </div>
-</div>
+</div> 
       {/* Data Management Section */}
       {transactions && transactions.length > 0 && (
         <div className="retro-card p-8">
