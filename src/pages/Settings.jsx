@@ -43,6 +43,12 @@ export default function CSVParser() {
 
     if (!file) return;
 
+    if (file.type !== "text/csv" && !file.name.endsWith(".csv")) {
+      showModal({ type: 'alert', message: "Please upload a valid CSV file." });
+      e.target.value = null;
+      return;
+    }
+
     setLoading(true);
     setSuccessMessage("");
 
