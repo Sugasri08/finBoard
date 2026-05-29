@@ -10,8 +10,10 @@ import { AuthProvider } from "./context/AuthContext";
 import { ModalProvider } from "./context/ModalContext";
 import Modal from "./components/Modal";
 import ProtectedRoute from "./components/ProtectedRoute";
+import GuestRoute from "./components/GuestRoute";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import ResetPassword from "./pages/ResetPassword";
 
 export default function App() {
   return (
@@ -21,11 +23,26 @@ export default function App() {
           <ModalProvider>
             <BrowserRouter>
               <Routes>
-                {/* ── Public auth routes (no Layout / sidebar) ──────── */}
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
+                {/* ── Public auth routes  */}
+                <Route
+                  path="/signin"
+                  element={
+                    <GuestRoute>
+                      <SignIn />
+                    </GuestRoute>
+                  }
+                />
+                <Route
+                  path="/signup"
+                  element={
+                    <GuestRoute>
+                      <SignUp />
+                    </GuestRoute>
+                  }
+                />
+                <Route path="/reset-password" element={<ResetPassword />} />
 
-                {/* ── Protected routes (with Layout / sidebar) ─────── */}
+                {/* ── Protected routes  */}
                 <Route
                   path="/"
                   element={

@@ -122,7 +122,7 @@ export default function SignIn() {
               <label htmlFor="signin-password" className="auth-label">Password</label>
               <button
                 type="button"
-                onClick={() => alert("Under Development !!")}
+                onClick={() => setForgotOpen(true)}
                 className="auth-link-btn"
               >
                 Forgot password?
