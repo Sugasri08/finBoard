@@ -11,6 +11,7 @@ export default function CSVParser() {
     setTransactions,
     currency,
     updateCurrency,
+    addTransaction
   } = useContext(DataContext);
 
   const { showModal } = useModal();
@@ -123,17 +124,7 @@ export default function CSVParser() {
       Currency: currency,
     };
 
-    const updatedTransactions = [
-      ...(transactions || []),
-      newTransaction,
-    ];
-
-    setTransactions(updatedTransactions);
-
-    localStorage.setItem(
-      "transactions",
-      JSON.stringify(updatedTransactions)
-    );
+    addTransaction(newTransaction);
 
     setManualTransaction({
       Date: format(new Date(), "dd/MM/yyyy"),
