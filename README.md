@@ -1,111 +1,218 @@
-<div align="left">
+<h1 align="center">
+  <img src="src/assets/finboard.gif" width="100" alt="gif">
+  <a href="https://finnboard0.netlify.app/">FinBoard</a>
+</h1>
 
-# FINBOARD
+<p align = "center">
+FinBoard is a retro-themed personal finance dashboard that empowers users to manage budgets, monitor transactions, analyze spending trends through interactive visualizations, and stay on top of their financial goals—all securely from the browser.
+</p>
 
-A retro-styled, interactive personal finance dashboard to manage budgets, visualize transactions, and keep track of your spending securely in your browser.
+<img src ="src/assets/picture1.png">
+
+<div align="center">
+
+### 📊 Interactive Dashboard
+
+Monitor your financial health at a glance with powerful visualizations, detailed spending insights, and an easy-to-navigate dashboard experience.
 
 </div>
 
-<p align="center">
-  <img width="1740" height="1011" alt="FinBoard Preview" src="https://github.com/user-attachments/assets/52fd99d8-7df9-41b0-bc31-65bb7fe09edd" />
-</p>
-
-
----
-
-## ✨ Features
+___
 
 <table>
-<tr>
-
-<td width="60%">
-
-📊 **Interactive Dashboard**  
-Visualize income and expenses using dynamic Recharts.
-
-💰 **Budget Management**  
-Set spending limits and monitor progress.
-
-📜 **Transaction History**  
-View, filter, and categorize transactions.
-
-📁 **Secure Local Data**  
-No backend needed — your financial data stays in your browser.
-
-💻 **Retro UI Design**  
-Dark grid terminal aesthetic with a nostalgic modern feel.
-
-</td>
-
-<td width="40%" align="center">
-
-<img src="src/assets/finb.gif" alt="FinBoard Demo" width="260"/>
-
-</td>
-
-</tr>
+  <tr>
+    <td width="50%">
+      <h3>💰 Budget Management</h3>
+      <p>
+        Set spending limits, track your expenses in real time, and monitor your financial goals with ease.
+        Stay in control of your budget and make smarter spending decisions.
+      </p>
+    </td>
+    <td width="50%">
+      <img src="src/assets/picture2.png" alt="Budget Management" width="100%">
+    </td>
+  </tr>
 </table>
 
----
+___
 
-## 🚀 Tech Stack
+<table>
+  <tr>
+    <td width="50%">
+      <img src="src/assets/picture3.png" alt="Transaction History" width="100%">
+    </td>
+    <td width="50%">
+      <h3>📜 Transaction History</h3>
+      <p>
+        Gain complete visibility into your finances with a detailed transaction history.
+        Quickly search, filter, and categorize records to better understand your spending habits
+        and maintain full control over your financial journey.
+      </p>
+    </td>
+  </tr>
+</table>
 
-| Category | Tech |
-|-----------|-------|
-| Frontend | React, React Router |
-| Build Tool | Vite |
-| Styling | Tailwind CSS, DaisyUI |
-| Charts | Recharts |
-| Icons | Lucide Icons, Custom SVG |
+___
 
----
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🧠 Insights</h3>
+      <p>
+        📊 Get a complete overview of your financial health with smart insights and spending analytics.<br>
+        💰 Instantly understand savings, expenses, and income trends to make better money decisions.<br>
+        📈 Identify top spending categories and track monthly patterns to improve financial control.
+      </p>
+    </td>
+    <td width="50%">
+      <img src="src/assets/picture4.png" alt="Insights Dashboard" width="100%">
+    </td>
+  </tr>
+</table>
 
-## 🛠️ Getting Started
+___
 
-### Prerequisites
+<table>
+  <tr>
+    <td width="50%">
+        <img src="src/assets/picture5.png" alt="Secure Local Data" width="100%">
+    </td>
+    <td width="50%">
+      <h3>📁 Secure Local Data</h3>
+      <p>
+        Your financial data stays completely private in your browser — no backend required.<br><br>
+        📤 Import your CSV or financial documents effortlessly to analyze your transactions.<br><br>
+        💱 Flexible currency support lets you view and manage data in your preferred currency.
+      </p>
+    </td>
+  </tr>
+</table>
 
-Install Node.js before starting:
+___
 
-https://nodejs.org/
+<h1 align="left">
+  <a>Let’s Get Started</a>
+</h1>
+ 
+ <span style="font-size:32px; font-weight:bold;">
+  Option 1
+</span><br><br>
 
-### Installation
+<h1 align="left">
+  <img src="src/assets/nodejsDark.svg" width="100" alt="Node.js">
+  <a href="https://nodejs.org/en" target="_blank">Node.js (Recommended)</a>
+</h1>
 
 1. Clone repository
 
 ```bash
 git clone https://github.com/khanirfan18/finBoard.git
-```
-
-2. Enter project folder
-
-```bash
 cd finBoard
 ```
+<br>
 
-3. Install packages
+2. Install packages
 
 ```bash
 npm install
 ```
+<br>
 
-4. Start development server
+3. Start development server
 
 ```bash
 npm run dev
 ```
 
+<br>
+
+ <span style="font-size:25px; font-weight:bold;">
+🎉 You are all set to run the project.  
+Start the server and open it in your browser to explore FinBoard.
+</span><br><br>
+
+___
+
+ <span style="font-size:32px; font-weight:bold;">
+  Other Option
+</span><br><br>
+
+## 🤝 Contributor Notice
+
+Please review the [CONTRIBUTING.md](./CONTRIBUTING.md) before starting your work.
+
+This project is actively evolving, and certain parts of the repository may be reserved for upcoming features and future milestones.
+
+⚠️ Docker support is part of the long-term roadmap and is currently intended for maintainer use. Any Docker-related contributions are out of scope unless explicitly requested in an issue by a maintainer.
+
+All contributors are expected to adhere to the project's [Code of Conduct](./CODE_OF_CONDUCT.md) to ensure a respectful and collaborative environment.
+
+___
+
+<h1 align="center">
+  <img src="src/assets/Contribute.png" width="200" alt="gif">
+  <a">Contribute</a>
+</h1>
+
+## 🤝 Planning to Contribute?
+
+Your contributions are highly appreciated and help improve FinBoard 🚀
+
+<a href="./CONTRIBUTING.md" style="text-decoration:none;">
+  <button>📘 Read CONTRIBUTING Guide</button>
+</a>
+
+<a href="./CODE_OF_CONDUCT.md" style="text-decoration:none;">
+  <button>📜 View Code of Conduct</button>
+</a>
+
 ---
 
-## 🤝 Contributing
+### 📌 Before You Start
 
-Planning to contribute?
+Please make sure to read the contributing guidelines before opening issues or submitting pull requests.
 
-Your contributions are appreciated. Please read `CONTRIBUTING.md` before opening issues or submitting pull requests.
+It includes:
 
-It covers:
+- ✅ Valid issue creation process  
+- ✅ Task claiming workflow  
+- ✅ Pull request guidelines  
+- ✅ Project scope and roadmap expectations  
 
-- Valid issue creation
-- Task claiming workflow
-- Pull request guidelines
+---
 
-Happy building 🚀
+💡 Following these guidelines ensures smooth collaboration and faster reviews.
+
+---
+
+### 🚀 Happy Building!
+
+___
+
+
+<h1 align="center">
+  <a">📜 Community Guidelines</a>
+</h1>
+
+## 🤝 Code of Conduct
+
+To maintain a welcoming and respectful environment for everyone, all contributors are expected to follow the project's Code of Conduct.
+
+<a href="./CODE_OF_CONDUCT.md" style="text-decoration:none;">
+  <button>📜 View Code of Conduct</button>
+</a>
+
+---
+
+### 📌 Expectations
+
+- ✅ Be respectful and constructive in all discussions  
+- ✅ Write clear and meaningful issue reports and pull requests  
+- ✅ Follow project guidelines while contributing  
+- ✅ Help maintain a positive and inclusive community  
+
+---
+
+💙 Thank you for being part of FinBoard and contributing to a better open-source experience!
+
+___
