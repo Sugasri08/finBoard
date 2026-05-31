@@ -123,7 +123,6 @@ export function AppContext({ children }) {
       addTransaction,
       updateTransaction,
       converting,
-      addTransaction,
     }}>
       {converting && (
         <div style={{
