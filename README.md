@@ -1,83 +1,107 @@
-<div align="left">
+<h1 align="center">
+  <img src="src/assets/finboard.gif" width="100" alt="gif">
+  <a href="https://finnboard0.netlify.app/">FinBoard</a>
+</h1>
 
-# FINBOARD
+<p align = "center">
+FinBoard is a retro-themed personal finance dashboard that empowers users to manage budgets, monitor transactions, analyze spending trends through interactive visualizations, and stay on top of their financial goals—all securely from the browser.
+</p>
 
-A retro-styled, interactive personal finance dashboard to manage budgets, visualize transactions, and keep track of your spending securely in your browser.
+<img src ="src/assets/picture1.png">
+
+<div align="center">
+
+### 📊 Interactive Dashboard
+
+Monitor your financial health at a glance with powerful visualizations, detailed spending insights, and an easy-to-navigate dashboard experience.
 
 </div>
 
-<p align="center">
-  <img width="1740" height="1011" alt="FinBoard Preview" src="https://github.com/user-attachments/assets/52fd99d8-7df9-41b0-bc31-65bb7fe09edd" />
-</p>
-
----
-
-## ✨ Features
+___
 
 <table>
-<tr>
-
-<td width="60%">
-
-📊 **Interactive Dashboard**
-Visualize income and expenses using dynamic Recharts.
-
-💰 **Budget Management**
-Set spending limits and monitor progress.
-
-📜 **Transaction History**
-View, filter, and categorize transactions.
-
-📁 **Secure Local Data**
-No backend needed — your financial data stays in your browser.
-
-💻 **Retro UI Design**
-Dark grid terminal aesthetic with a nostalgic modern feel.
-
-</td>
-
-<td width="40%" align="center">
-
-<img src="src/assets/finb.gif" alt="FinBoard Demo" width="260"/>
-
-</td>
-
-</tr>
+  <tr>
+    <td width="50%">
+      <h3>💰 Budget Management</h3>
+      <p>
+        Set spending limits, track your expenses in real time, and monitor your financial goals with ease.
+        Stay in control of your budget and make smarter spending decisions.
+      </p>
+    </td>
+    <td width="50%">
+      <img src="src/assets/picture2.png" alt="Budget Management" width="100%">
+    </td>
+  </tr>
 </table>
 
----
+___
 
-## 🚀 Tech Stack
+<table>
+  <tr>
+    <td width="50%">
+      <img src="src/assets/picture3.png" alt="Transaction History" width="100%">
+    </td>
+    <td width="50%">
+      <h3>📜 Transaction History</h3>
+      <p>
+        Gain complete visibility into your finances with a detailed transaction history.
+        Quickly search, filter, and categorize records to better understand your spending habits
+        and maintain full control over your financial journey.
+      </p>
+    </td>
+  </tr>
+</table>
 
-| Category   | Tech                     |
-| ---------- | ------------------------ |
-| Frontend   | React, React Router      |
-| Build Tool | Vite                     |
-| Styling    | Tailwind CSS, DaisyUI    |
-| Charts     | Recharts                 |
-| Icons      | Lucide Icons, Custom SVG |
+___
 
----
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🧠 Insights</h3>
+      <p>
+        📊 Get a complete overview of your financial health with smart insights and spending analytics.<br>
+        💰 Instantly understand savings, expenses, and income trends to make better money decisions.<br>
+        📈 Identify top spending categories and track monthly patterns to improve financial control.
+      </p>
+    </td>
+    <td width="50%">
+      <img src="src/assets/picture4.png" alt="Insights Dashboard" width="100%">
+    </td>
+  </tr>
+</table>
 
-## 🛠️ Getting Started
+___
 
-### Prerequisites
+<table>
+  <tr>
+    <td width="50%">
+        <img src="src/assets/picture5.png" alt="Secure Local Data" width="100%">
+    </td>
+    <td width="50%">
+      <h3>📁 Secure Local Data</h3>
+      <p>
+        Your financial data stays completely private in your browser — no backend required.<br><br>
+        📤 Import your CSV or financial documents effortlessly to analyze your transactions.<br><br>
+        💱 Flexible currency support lets you view and manage data in your preferred currency.
+      </p>
+    </td>
+  </tr>
+</table>
 
-* **Node.js** → https://nodejs.org/
+___
 
-> **Contributor Notice**
->
-> Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before starting work.
->
-> As the project is actively evolving, some parts of the repository may be reserved for future milestones.
->
-> Docker support currently exists for future roadmap plans and maintainer use. Docker-related work is currently out of scope unless explicitly requested through an active maintainer-created issue.
->
-> All contributors are also expected to follow the project's [Code of Conduct](./CODE_OF_CONDUCT.md).
 
----
+<h1 align="left">
+  <img src="src/assets/start.gif" width="50" alt="Node.js">
+   Let's Get Started
+</h1>
+ 
+## 🚀 Installation
 
-### Node.js (Recommended)
+<h1 align="left">
+  <img src="src/assets/nodejsDark.svg" width="100" alt="Node.js">
+  <a href="https://nodejs.org/en" target="_blank">Node.js</a>
+</h1>
 
 1. Clone repository
 
@@ -85,12 +109,14 @@ Dark grid terminal aesthetic with a nostalgic modern feel.
 git clone https://github.com/khanirfan18/finBoard.git
 cd finBoard
 ```
+<br>
 
 2. Install packages
 
 ```bash
 npm install
 ```
+<br>
 
 3. Start development server
 
@@ -98,44 +124,115 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173
+<br>
 
----
+ <span style="font-size:25px; font-weight:bold;">
+🎉 You are all set to run the project.  
+Start the server and open it in your browser to explore FinBoard.
+</span><br><br>
 
-> **Docker Information**
->
-> Docker configuration is included in the repository for future roadmap plans and maintainer use.
->
-> Refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for the latest project scope and contribution guidelines.
+___
 
----
 
 ## 🤝 Contributing
 
-Planning to contribute?
+Thank you for your interest in contributing to FinBoard! 🚀
 
-Your contributions are appreciated. Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening issues or submitting pull requests.
+Your contributions help improve the project and are greatly appreciated.
 
-It covers:
+### 📘 Before You Start
 
-* Valid issue creation
-* Task claiming workflow
-* Pull request guidelines
-* Project scope and roadmap expectations
+Please review the following documents before opening an issue or submitting a pull request:
 
-Please also review and follow the project's [Code of Conduct](./CODE_OF_CONDUCT.md).
+* [Contributing Guide](./CONTRIBUTING.md)
+* [Code of Conduct](./CODE_OF_CONDUCT.md)
 
-Happy building 🚀
+### 📌 Contribution Guidelines
 
----
+* Follow the issue creation process outlined in the contribution guide.
+* Claim tasks before starting work when required.
+* Follow pull request guidelines and project standards.
+* Keep contributions aligned with the project's scope and roadmap.
 
-## 📜 Community Guidelines
+### ⚠️ Important Note
 
-To help maintain a welcoming and respectful environment for everyone:
+Docker support is part of the long-term roadmap and is currently intended for maintainer use. Docker-related contributions are out of scope unless explicitly requested by a maintainer.
 
-* Follow the [Code of Conduct](./CODE_OF_CONDUCT.md)
-* Be respectful and constructive in discussions
-* Provide clear issue reports and pull requests
-* Help create a positive experience for all contributors
+### 💙 Community Expectations
 
-Thank you for being part of the FinBoard ❤️
+* Be respectful and constructive in discussions.
+* Write clear and meaningful issues and pull requests.
+* Collaborate professionally with maintainers and contributors.
+* Help maintain a welcoming and inclusive environment for everyone.
+
+### 🚀 Happy Building!
+
+Thank you for helping make FinBoard better!
+___
+
+## 🚀 Tech Stack
+
+<table border="1" cellpadding="12" cellspacing="0">
+  <tr>
+    <td>
+
+<table>
+  <tr>
+    <td align="center" width="220"><b>Frontend</b></td>
+    <td>|</td>
+    <td>
+      <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+      <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" />
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Build Tool</b></td>
+    <td>|</td>
+    <td>
+      <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E" />
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Styling</b></td>
+    <td>|</td>
+    <td>
+      <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+      <img src="https://img.shields.io/badge/DaisyUI-5A0EF8?style=for-the-badge" />
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Charts</b></td>
+    <td>|</td>
+    <td>
+      <img src="https://img.shields.io/badge/Recharts-FF6B6B?style=for-the-badge" />
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Icons</b></td>
+    <td>|</td>
+    <td>
+      <img src="https://img.shields.io/badge/Lucide_Icons-000000?style=for-the-badge" />
+      <img src="https://img.shields.io/badge/Custom_SVG-FF9900?style=for-the-badge" />
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center"><b>Backend / Database</b></td>
+    <td>|</td>
+    <td>
+      <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" />
+    </td>
+  </tr>
+
+</table>
+    </td>
+  </tr>
+</table>
+
+___
+
+
