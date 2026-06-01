@@ -247,14 +247,6 @@ export default function Settings() {
                 const mapped = demoData.map((d) => ({ ...d, source: 'demo' }));
                 const normalized = normalizeTransactions(mapped, { currency, source: 'demo' });
 
-<<<<<<< HEAD
-              setTransactions(updated);
-              localStorage.setItem("transactions", JSON.stringify(updated));
-              setSuccessMessage("Demo Data Loaded!");
-              setTimeout(() => setSuccessMessage(""), 3000);
-            }}
-            className="h-[48px] min-w-[240px] rounded-xl bg-[#FF6B00] px-8 text-sm font-black uppercase text-[whitesmoke]"
-=======
                 const updated = importMode === "append" ? [...(transactions || []), ...normalized] : normalized;
 
                 setTransactions(updated);
@@ -263,7 +255,6 @@ export default function Settings() {
                 setTimeout(() => setSuccessMessage(""), 3000);
               }}
             className="h-[48px] min-w-[240px] rounded-xl bg-[#FF6B00] px-8 text-sm font-black uppercase text-black"
->>>>>>> cab0091e8739585ee6eb2c3310e0baf6455e1d6c
           >
             Load Demo Data
           </button>
