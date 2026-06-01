@@ -406,7 +406,7 @@ export default function Transaction() {
                 onClick={() => toggleCategory(category)}
                 className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-sm border transition-colors ${
                   selectedCategories.includes(category)
-                    ? "bg-[#FF6B00] text-black border-[#FF6B00]"
+                    ? "bg-[#FF6B00] text-[whitesmoke] border-[#FF6B00]"
                     : "bg-[#1F1F1F] text-gray-300 border-[#2a2a2a] hover:border-[#FF6B00]"
                 }`}
               >
@@ -428,7 +428,7 @@ export default function Transaction() {
         <div className="flex justify-end items-center px-4 pt-4">
           <button
             onClick={exportToCSV}
-            className="px-3 py-2 bg-[#FF6B00] text-black text-sm font-bold rounded-md hover:opacity-90 transition"
+            className="px-3 py-2 bg-[#FF6B00] text-[whitesmoke] text-sm font-bold rounded-md hover:opacity-90 transition"
           >
             Export CSV
           </button>
@@ -497,7 +497,7 @@ export default function Transaction() {
     </div>
   ) : (
     <div className="flex flex-col items-center justify-center h-full min-h-[60vh]">
-      <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/30 shadow-[0_0_20px_rgba(255,107,0,0.1)] animate-in fade-in zoom-in-95 duration-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(255,107,0,0.12)]">
+      <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/20 animate-in fade-in zoom-in-95 duration-500 transition-all duration-300 hover:border-[#FF6B00]/28">
         <div className="w-16 h-16 bg-[#FF6B00]/10 flex items-center justify-center rounded-full mb-6 text-[#FF6B00]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
