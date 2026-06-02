@@ -179,7 +179,7 @@ export default function Transaction() {
 
     if (searchTerm) {
       indexed = indexed.filter(({ t }) =>
-        t.Description.toLowerCase().includes(searchTerm.toLowerCase())
+        (t.Description || t.description || '').toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -188,7 +188,7 @@ export default function Transaction() {
       if (dateRange) {
         indexed = indexed.filter(({ t }) => {
           try {
-            const transactionDate = parse(t.Date, "dd/MM/yyyy", new Date());
+            const transactionDate = parse(t.Date || t.date, "dd/MM/yyyy", new Date());
             return transactionDate >= dateRange.start && transactionDate <= dateRange.end;
           } catch {
             return true;
@@ -199,7 +199,7 @@ export default function Transaction() {
 
     if (selectedCategories.length > 0) {
       indexed = indexed.filter(({ t }) =>
-        selectedCategories.includes(t.category || categorize(t.Description))
+        selectedCategories.includes(t.category || t.Category || categorize(t.Description))
       );
     }
 
@@ -215,15 +215,15 @@ export default function Transaction() {
     indexed.sort((a, b) => {
       switch (sortBy) {
         case "date-asc":
-          return parse(a.t.Date, "dd/MM/yyyy", new Date()) - parse(b.t.Date, "dd/MM/yyyy", new Date());
+          return parse(a.t.Date || a.t.date, "dd/MM/yyyy", new Date()) - parse(b.t.Date || b.t.date, "dd/MM/yyyy", new Date());
         case "date-desc":
-          return parse(b.t.Date, "dd/MM/yyyy", new Date()) - parse(a.t.Date, "dd/MM/yyyy", new Date());
+          return parse(b.t.Date || b.t.date, "dd/MM/yyyy", new Date()) - parse(a.t.Date || a.t.date, "dd/MM/yyyy", new Date());
         case "amount-asc":
           return Number(a.t.Amount) - Number(b.t.Amount);
         case "amount-desc":
           return Number(b.t.Amount) - Number(a.t.Amount);
         case "category":
-          return (a.t.category || categorize(a.t.Description)).localeCompare(b.t.category || categorize(b.t.Description));
+          return (a.t.category || a.t.Category || categorize(a.t.Description)).localeCompare(b.t.category || b.t.Category || categorize(b.t.Description));
         default:
           return 0;
       }
@@ -406,7 +406,7 @@ export default function Transaction() {
                 onClick={() => toggleCategory(category)}
                 className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-sm border transition-colors ${
                   selectedCategories.includes(category)
-                    ? "bg-[#FF6B00] text-black border-[#FF6B00]"
+                    ? "bg-[#FF6B00] text-[whitesmoke] border-[#FF6B00]"
                     : "bg-[#1F1F1F] text-gray-300 border-[#2a2a2a] hover:border-[#FF6B00]"
                 }`}
               >
@@ -428,7 +428,7 @@ export default function Transaction() {
         <div className="flex justify-end items-center px-4 pt-4">
           <button
             onClick={exportToCSV}
-            className="px-3 py-2 bg-[#FF6B00] text-black text-sm font-bold rounded-md hover:opacity-90 transition"
+            className="px-3 py-2 bg-[#FF6B00] text-[whitesmoke] text-sm font-bold rounded-md hover:opacity-90 transition"
           >
             Export CSV
           </button>
@@ -497,7 +497,7 @@ export default function Transaction() {
     </div>
   ) : (
     <div className="flex flex-col items-center justify-center h-full min-h-[60vh]">
-      <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/30 shadow-[0_0_20px_rgba(255,107,0,0.1)] animate-in fade-in zoom-in-95 duration-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(255,107,0,0.12)]">
+      <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/20 animate-in fade-in zoom-in-95 duration-500 transition-all duration-300 hover:border-[#FF6B00]/28">
         <div className="w-16 h-16 bg-[#FF6B00]/10 flex items-center justify-center rounded-full mb-6 text-[#FF6B00]">
           <svg
             xmlns="http://www.w3.org/2000/svg"

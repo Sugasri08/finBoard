@@ -16,28 +16,51 @@ import {
 import React from "react";
 import { parse, format } from "date-fns";
 import { TrendingUp, TrendingDown, PiggyBank, Plus, X } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Dashboard() {
-  const { transactions, currency, addTransaction} = React.useContext(DataContext);
+  const { transactions, currency, addTransaction } = React.useContext(DataContext);
+  const { theme } = useTheme();
 
   const [loading] = React.useState(false);
   const [showForm, setShowForm] = React.useState(false);
   const [successMsg, setSuccessMsg] = React.useState("");
+  const [errorMsg, setErrorMsg] = React.useState("");
   const [form, setForm] = React.useState({
     Date: format(new Date(), "dd/MM/yyyy"),
     Description: "",
     Amount: "",
   });
-
+  const [transactionType, setTransactionType] = React.useState("expense");
   const handleQuickAdd = (e) => {
     e.preventDefault();
-    if (!form.Description || !form.Amount) return;
-    if (Number(form.Amount) === 0) return;
+    setErrorMsg("");
+
+    const description = form.Description.trim();
+    const amount = Number(form.Amount);
+
+    if (!form.Date || !description || !form.Amount) {
+      setErrorMsg("Please fill all fields before adding a transaction.");
+      return;
+    }
+
+    if (!Number.isFinite(amount) || amount === 0) {
+      setErrorMsg("Enter a valid non-zero amount.");
+      return;
+    }
+
+    if (typeof addTransaction !== "function") {
+      setErrorMsg("Transaction service is unavailable. Please refresh and try again.");
+      return;
+    }
 
     addTransaction({
       Date: form.Date,
-      Description: form.Description,
-      Amount: form.Amount,
+      Description: description || form.Description,
+      Amount: transactionType === "expense"
+        ? -Math.abs(Number(amount || form.Amount))
+        : Math.abs(Number(amount || form.Amount)),
+      category: categorize(description || form.Description),
       Currency: currency,
     });
 
@@ -48,18 +71,16 @@ export default function Dashboard() {
     });
 
     setSuccessMsg("Transaction added!");
+    setShowForm(false);
     setTimeout(() => setSuccessMsg(""), 3000);
   };
 
-  const COLORS = [
-    "#0088FE",
-    "#00C49F",
-    "#FFBB28",
-    "#FF8042",
-    "#A28DFF",
-    "#FF6B6B",
-    "#82ca9d",
-  ];
+  const COLORS = theme === "light"
+    ? ["#8B5CF6", "#A78BFA", "#C4B5FD", "#DDD6FE", "#EDE9FE", "#F5F3FF", "#7C3AED"]
+    : ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28DFF", "#FF6B6B", "#82ca9d"];
+
+  const metricAccent = theme === "light" ? "rgba(139,92,246,0.12)" : undefined;
+  const metricBorder = theme === "light" ? "1px solid rgba(139,92,246,0.22)" : undefined;
 
   const totalIncome = transactions?.reduce((acc, amt) => {
     const num = Number(amt.Amount);
@@ -73,17 +94,16 @@ export default function Dashboard() {
 
   const savings = totalIncome + totalExpense;
 
-  const categoryData =
-    transactions
-      ?.filter((t) => Number(t.Amount) < 0)
-      .reduce((acc, item) => {
-        const category = categorize(item.Description);
+    const categoryData =
+      transactions
+        ?.filter((t) => Number(t.Amount) < 0)
+        .reduce((acc, item) => {
+          const category = item.category || item.Category || categorize(item.Description);
 
-        acc[category] =
-          (acc[category] || 0) + Math.abs(Number(item.Amount));
+          acc[category] = (acc[category] || 0) + Math.abs(Number(item.Amount));
 
-        return acc;
-      }, {}) || {};
+          return acc;
+        }, {}) || {};
 
   const chartData = Object.entries(categoryData).map(([name, value]) => ({
     name,
@@ -145,8 +165,8 @@ return (
                   <div
                     className="p-3 rounded-xl"
                     style={{
-                      background: "rgba(0,196,159,0.1)",
-                      border: "1px solid rgba(0,196,159,0.2)",
+                      background: metricAccent || "rgba(0,196,159,0.1)",
+                      border: metricBorder || "1px solid rgba(0,196,159,0.2)",
                     }}
                   >
                     <TrendingUp className="w-5 h-5 text-[#00C49F]" />
@@ -169,8 +189,8 @@ return (
                   <div
                     className="p-3 rounded-xl"
                     style={{
-                      background: "rgba(255,107,107,0.1)",
-                      border: "1px solid rgba(255,107,107,0.2)",
+                      background: metricAccent || "rgba(255,107,107,0.1)",
+                      border: metricBorder || "1px solid rgba(255,107,107,0.2)",
                     }}
                   >
                     <TrendingDown className="w-5 h-5 text-[#FF6B6B]" />
@@ -193,8 +213,8 @@ return (
                   <div
                     className="p-3 rounded-xl"
                     style={{
-                      background: "rgba(0,136,254,0.1)",
-                      border: "1px solid rgba(0,136,254,0.2)",
+                      background: metricAccent || "rgba(0,136,254,0.1)",
+                      border: metricBorder || "1px solid rgba(0,136,254,0.2)",
                     }}
                   >
                     <PiggyBank className="w-5 h-5 text-[#0088FE]" />
@@ -238,8 +258,8 @@ return (
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="income" fill="#00C49F" />
-                    <Bar dataKey="spent" fill="#FF6B6B" />
+                    <Bar dataKey="income" fill={theme === "light" ? "#8B5CF6" : "#00C49F"} />
+                    <Bar dataKey="spent" fill={theme === "light" ? "#A78BFA" : "#FF6B6B"} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -247,7 +267,7 @@ return (
           </>
         ) : (
           <div className="flex flex-col items-center justify-center h-full min-h-[78vh] pt-10 animate-in fade-in duration-500">
-            <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/30 shadow-[0_0_20px_rgba(255,107,0,0.1)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(255,107,0,0.12)]">
+            <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/20 transition-all duration-300 hover:border-[#FF6B00]/28">
               <div className="w-16 h-16 bg-[#FF6B00]/10 flex items-center justify-center rounded-full mb-6 text-[#FF6B00]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -279,11 +299,20 @@ return (
 
       {/* Floating Action Button */}
       <button
-        onClick={() => setShowForm(!showForm)}
+        onClick={() => {
+          setErrorMsg("");
+          setShowForm(!showForm);
+        }}
         className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-[#FF6B00] text-white flex items-center justify-center shadow-lg hover:bg-[#e05e00] transition-all duration-200 hover:scale-110"
       >
         {showForm ? <X className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
       </button>
+
+      {successMsg && (
+        <div className="fixed bottom-24 right-8 z-50 rounded-xl border border-green-500/40 bg-[#111] px-4 py-3 text-sm font-bold text-green-400 shadow-lg">
+          {successMsg}
+        </div>
+      )}
 
       {/* Modal Form */}
       {showForm && (
@@ -295,6 +324,7 @@ return (
             <form onSubmit={handleQuickAdd} className="flex flex-col gap-3">
               <input
                 type="date"
+                required
                 className="retro-input p-3 w-full"
                 onChange={(e) => {
                   if (!e.target.value) return;
@@ -305,20 +335,47 @@ return (
               />
               <input
                 type="text"
+                required
                 placeholder="Description e.g. Swiggy"
                 className="retro-input p-3 w-full"
                 value={form.Description}
                 onChange={(e) => setForm({ ...form, Description: e.target.value })}
               />
+              <div className="flex rounded-xl overflow-hidden border border-[#222]">
+                <button
+                  type="button"
+                  onClick={() => setTransactionType("expense")}
+                  className={`flex-1 py-3 text-sm font-bold uppercase tracking-wider transition-colors ${
+                    transactionType === "expense"
+                      ? "bg-[#FF6B6B] text-white"
+                      : "bg-[#111] text-gray-400 hover:text-white"
+                  }`}
+                >
+                  Expense
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTransactionType("income")}
+                  className={`flex-1 py-3 text-sm font-bold uppercase tracking-wider transition-colors ${
+                    transactionType === "income"
+                      ? "bg-[#00C49F] text-white"
+                      : "bg-[#111] text-gray-400 hover:text-white"
+                  }`}
+                >
+                  Income
+                </button>
+              </div>
               <input
                 type="number"
-                placeholder="-450 (expense) or 5000 (income)"
+                placeholder="e.g., 450"
+                required
+                step="0.01"
                 className="retro-input p-3 w-full"
                 value={form.Amount}
                 onChange={(e) => setForm({ ...form, Amount: e.target.value })}
               />
-              {successMsg && (
-                <p className="text-green-400 text-xs">{successMsg}</p>
+              {errorMsg && (
+                <p className="text-red-400 text-xs">{errorMsg}</p>
               )}
               <div className="flex gap-3 mt-2">
                 <button type="submit" className="retro-btn flex-1">
@@ -326,7 +383,10 @@ return (
                 </button>
                 <button
                   type="button"
-                  onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setErrorMsg("");
+                    setShowForm(false);
+                  }}
                   className="flex-1 px-4 py-2 border border-gray-600 text-gray-400 hover:text-white transition-colors font-bold uppercase tracking-wider text-sm"
                 >
                   Cancel

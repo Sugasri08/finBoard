@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import Papa from "papaparse";
 import { DataContext, CURRENCIES } from "../context/AppContext";
 import { demoData } from "../data/demoData";
+import { normalizeTransaction, normalizeTransactions } from "../lib/transactionNormalizer";
 import { format } from "date-fns";
 import { useModal } from "../context/ModalContext";
 
@@ -9,7 +10,7 @@ import { useModal } from "../context/ModalContext";
 // REUSABLE SECTION COMPONENT
 // =========================
 const Section = ({ title, subtitle, children, right }) => (
-  <div className="w-full rounded-[24px] border border-[#222] bg-[#141414] p-6 md:p-8 transition-all duration-300 hover:border-[#FF6B00]/30 hover:shadow-[0_0_20px_rgba(255,107,0,0.05)]">
+  <div className="w-full rounded-[24px] border border-[#2a2a2a] bg-[#141414] p-6 md:p-8 transition-all duration-300 hover:border-[#FF6B00]/20">
 
     <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
 
@@ -60,7 +61,7 @@ export default function Settings() {
   const [importMode, setImportMode] = useState("replace");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-
+  const [transactionType, setTransactionType] = useState("expense");
   const [manualTransaction, setManualTransaction] = useState({
     Date: format(new Date(), "dd/MM/yyyy"),
     Description: "",
@@ -108,13 +109,16 @@ export default function Settings() {
           return;
         }
 
-        const normalizedData = parsedData.map((item) => ({
+        const mapped = parsedData.map((item) => ({
           Date: item.Date,
           Description: item.Description,
           Amount: item.Amount,
           Category: item.Category,
           Currency: currency,
+          source: 'csv',
         }));
+
+        const normalizedData = normalizeTransactions(mapped, { currency, source: 'csv' });
 
         const updatedData =
           importMode === "append"
@@ -159,9 +163,12 @@ export default function Settings() {
     const newTransaction = {
       Date: manualTransaction.Date,
       Description: manualTransaction.Description,
-      Amount: manualTransaction.Amount,
-      category: manualTransaction.category,
+      Amount: transactionType === "expense"
+        ? -Math.abs(Number(manualTransaction.Amount))
+        : Math.abs(Number(manualTransaction.Amount)),
+      category: manualTransaction.Category,
       Currency: currency,
+      source: 'manual',
     };
 
     addTransaction(newTransaction);
@@ -217,7 +224,7 @@ export default function Settings() {
                 onClick={() => setImportMode(mode)}
                 className={`h-[42px] px-5 text-xs font-bold uppercase transition-all ${
                   importMode === mode
-                    ? "bg-[#FF6B00] text-black"
+                    ? "bg-[#FF6B00] text-[whitesmoke]"
                     : "bg-[#111] text-gray-400 hover:text-white"
                 }`}
               >
@@ -236,17 +243,17 @@ export default function Settings() {
           />
 
           <button
-            onClick={() => {
-              const updated =
-                importMode === "append"
-                  ? [...(transactions || []), ...demoData]
-                  : demoData;
+              onClick={() => {
+                const mapped = demoData.map((d) => ({ ...d, source: 'demo' }));
+                const normalized = normalizeTransactions(mapped, { currency, source: 'demo' });
 
-              setTransactions(updated);
-              localStorage.setItem("transactions", JSON.stringify(updated));
-              setSuccessMessage("Demo Data Loaded!");
-              setTimeout(() => setSuccessMessage(""), 3000);
-            }}
+                const updated = importMode === "append" ? [...(transactions || []), ...normalized] : normalized;
+
+                setTransactions(updated);
+                localStorage.setItem("transactions", JSON.stringify(updated));
+                setSuccessMessage("Demo Data Loaded!");
+                setTimeout(() => setSuccessMessage(""), 3000);
+              }}
             className="h-[48px] min-w-[240px] rounded-xl bg-[#FF6B00] px-8 text-sm font-black uppercase text-black"
           >
             Load Demo Data
@@ -261,7 +268,7 @@ export default function Settings() {
         right={
           <button
             onClick={() => setShowManualEntry(!showManualEntry)}
-            className="rounded-xl border border-[#222] px-5 py-2 text-sm font-semibold uppercase text-gray-400"
+            className="rounded-xl border border-[#222] px-5 py-2 text-sm font-semibold uppercase text-[whitesmoke]"
           >
             {showManualEntry ? "Hide Form" : "Show Form"}
           </button>
@@ -342,7 +349,37 @@ export default function Settings() {
                 />
               </div>
 
-              {/* AMOUNT — Fix: step="0.01" added back for decimal support */}
+              {/* AMOUNT with Income/Expense toggle */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase text-gray-500">
+                  Type
+                </label>
+                <div className="flex rounded-xl overflow-hidden border border-[#222]">
+                  <button
+                    type="button"
+                    onClick={() => setTransactionType("expense")}
+                    className={`flex-1 py-3 text-sm font-bold uppercase tracking-wider transition-colors ${
+                      transactionType === "expense"
+                        ? "bg-[#FF6B6B] text-white"
+                        : "bg-[#111] text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    Expense
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTransactionType("income")}
+                    className={`flex-1 py-3 text-sm font-bold uppercase tracking-wider transition-colors ${
+                      transactionType === "income"
+                        ? "bg-[#00C49F] text-white"
+                        : "bg-[#111] text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    Income
+                  </button>
+                </div>
+              </div>
+
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase text-gray-500">
                   Amount
@@ -351,7 +388,8 @@ export default function Settings() {
                   type="number"
                   required
                   step="0.01"
-                  placeholder="e.g., -450 or 5000"
+                  min="0.01"
+                  placeholder="e.g., 450"
                   value={manualTransaction.Amount}
                   onChange={(e) =>
                     setManualTransaction({
@@ -367,7 +405,7 @@ export default function Settings() {
             <div className="flex gap-3">
               <button
                 type="submit"
-                className="rounded-xl bg-[#FF6B00] px-7 py-3 font-black uppercase text-black"
+                className="rounded-xl bg-[#FF6B00] px-7 py-3 font-black uppercase text-[whitesmoke]"
               >
                 Add Transaction
               </button>
