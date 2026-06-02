@@ -16,9 +16,11 @@ import {
 import React from "react";
 import { parse, format } from "date-fns";
 import { TrendingUp, TrendingDown, PiggyBank, Plus, X } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Dashboard() {
   const { transactions, currency, addTransaction } = React.useContext(DataContext);
+  const { theme } = useTheme();
 
   const [loading] = React.useState(false);
   const [showForm, setShowForm] = React.useState(false);
@@ -73,15 +75,12 @@ export default function Dashboard() {
     setTimeout(() => setSuccessMsg(""), 3000);
   };
 
-  const COLORS = [
-    "#0088FE",
-    "#00C49F",
-    "#FFBB28",
-    "#FF8042",
-    "#A28DFF",
-    "#FF6B6B",
-    "#82ca9d",
-  ];
+  const COLORS = theme === "light"
+    ? ["#8B5CF6", "#A78BFA", "#C4B5FD", "#DDD6FE", "#EDE9FE", "#F5F3FF", "#7C3AED"]
+    : ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28DFF", "#FF6B6B", "#82ca9d"];
+
+  const metricAccent = theme === "light" ? "rgba(139,92,246,0.12)" : undefined;
+  const metricBorder = theme === "light" ? "1px solid rgba(139,92,246,0.22)" : undefined;
 
   const totalIncome = transactions?.reduce((acc, amt) => {
     const num = Number(amt.Amount);
@@ -166,8 +165,8 @@ return (
                   <div
                     className="p-3 rounded-xl"
                     style={{
-                      background: "rgba(0,196,159,0.1)",
-                      border: "1px solid rgba(0,196,159,0.2)",
+                      background: metricAccent || "rgba(0,196,159,0.1)",
+                      border: metricBorder || "1px solid rgba(0,196,159,0.2)",
                     }}
                   >
                     <TrendingUp className="w-5 h-5 text-[#00C49F]" />
@@ -190,8 +189,8 @@ return (
                   <div
                     className="p-3 rounded-xl"
                     style={{
-                      background: "rgba(255,107,107,0.1)",
-                      border: "1px solid rgba(255,107,107,0.2)",
+                      background: metricAccent || "rgba(255,107,107,0.1)",
+                      border: metricBorder || "1px solid rgba(255,107,107,0.2)",
                     }}
                   >
                     <TrendingDown className="w-5 h-5 text-[#FF6B6B]" />
@@ -214,8 +213,8 @@ return (
                   <div
                     className="p-3 rounded-xl"
                     style={{
-                      background: "rgba(0,136,254,0.1)",
-                      border: "1px solid rgba(0,136,254,0.2)",
+                      background: metricAccent || "rgba(0,136,254,0.1)",
+                      border: metricBorder || "1px solid rgba(0,136,254,0.2)",
                     }}
                   >
                     <PiggyBank className="w-5 h-5 text-[#0088FE]" />
@@ -259,8 +258,8 @@ return (
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="income" fill="#00C49F" />
-                    <Bar dataKey="spent" fill="#FF6B6B" />
+                    <Bar dataKey="income" fill={theme === "light" ? "#8B5CF6" : "#00C49F"} />
+                    <Bar dataKey="spent" fill={theme === "light" ? "#A78BFA" : "#FF6B6B"} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -268,7 +267,7 @@ return (
           </>
         ) : (
           <div className="flex flex-col items-center justify-center h-full min-h-[78vh] pt-10 animate-in fade-in duration-500">
-            <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/30 shadow-[0_0_20px_rgba(255,107,0,0.1)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(255,107,0,0.12)]">
+            <div className="retro-card p-12 flex flex-col items-center max-w-md text-center border-[#FF6B00]/20 transition-all duration-300 hover:border-[#FF6B00]/28">
               <div className="w-16 h-16 bg-[#FF6B00]/10 flex items-center justify-center rounded-full mb-6 text-[#FF6B00]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
