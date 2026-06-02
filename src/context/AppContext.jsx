@@ -1,9 +1,7 @@
-
 import React from 'react';
 import normalizeTransaction, { normalizeTransactions } from '../lib/transactionNormalizer';
 
 export const DataContext = React.createContext();
-
 export const CURRENCIES = [
   { code: 'INR', symbol: '₹', name: 'Indian Rupee' },
   { code: 'USD', symbol: '$', name: 'US Dollar' },
@@ -23,11 +21,11 @@ function readLocalStorageJSON(key, fallback) {
     return fallback;
   }
 }
-
 export function AppContext({ children }) {
   const [transactions, setTransactions] = React.useState(() =>
     readLocalStorageJSON('transactions', [])
   );
+
   const [currency, setCurrency] = React.useState(() =>
     readLocalStorageJSON('currency', CURRENCIES[0])
   );
@@ -60,7 +58,7 @@ export function AppContext({ children }) {
       .catch((err) => console.error(err));
   }, []);
 
-  // Normalize any stored transactions on mount so the app uses a consistent schema
+  // Normalize stored transactions on mount
   React.useEffect(() => {
     try {
       const stored = readLocalStorageJSON('transactions', []);
@@ -76,28 +74,6 @@ export function AppContext({ children }) {
     } catch (e) {
       console.error('Normalization failed', e);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Normalize any stored transactions on mount so the app uses a consistent schema
-  React.useEffect(() => {
-    try {
-      const stored = readLocalStorageJSON('transactions', []);
-      if (Array.isArray(stored) && stored.length > 0) {
-        const normalized = normalizeTransactions(stored, { currency });
-        // Only write back if normalization changed (basic length check suffices here)
-        if (JSON.stringify(normalized) !== JSON.stringify(stored)) {
-          setTransactions(normalized);
-          localStorage.setItem('transactions', JSON.stringify(normalized));
-        }
-      }
-    } catch (e) {
-      // ignore normalization failures
-      console.error('Normalization failed', e);
-    }
-    // run once on mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateCurrency = async (selectedCurrency) => {
