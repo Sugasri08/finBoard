@@ -87,7 +87,34 @@ Open:
 ```text
 http://localhost:5173
 ```
+## 🔧 Local Development Setup (Supabase)
 
+FinBoard uses Supabase for authentication and data storage.
+
+### 1. Create a Supabase Project
+
+1. Visit https://supabase.com
+2. Sign in or create a free account.
+3. Click **New Project**.
+4. Enter a project name and database password.
+5. Wait for the project to finish provisioning.
+
+### 2. Get Your Supabase Credentials
+
+From your Supabase project dashboard:
+
+1. Navigate to **Settings → API**
+2. Copy:
+   - **Project URL**
+   - **anon public key**
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_SUPABASE_URL=your_project_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
 ---
 
 ## 🛠 Tech Stack
