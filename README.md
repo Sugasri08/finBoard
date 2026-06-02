@@ -89,6 +89,67 @@ http://localhost:5173
 ```
 
 ---
+## 🔧 Local Development Setup (Supabase)
+
+FinBoard uses Supabase for authentication and data storage.
+
+### 1. Create a Supabase Project
+
+1. Visit https://supabase.com
+2. Sign in or create a free account.
+3. Click **New Project**.
+4. Enter a project name and database password.
+5. Wait for the project to finish provisioning.
+
+### 2. Get Your Supabase Credentials
+
+From your Supabase project dashboard:
+
+1. Navigate to **Settings → API**
+2. Copy:
+
+   * **Project URL**
+   * **anon public key**
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_SUPABASE_URL=your_project_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
+```
+
+Example:
+
+```env
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOi...
+```
+
+### 4. Restart the Development Server
+
+After creating or updating the `.env` file:
+
+```bash
+npm run dev
+```
+
+### Troubleshooting
+
+If you encounter:
+
+```text
+Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY
+```
+
+make sure:
+
+* The `.env` file is located in the project root directory.
+* Both variables are defined correctly.
+* The development server has been restarted after modifying the `.env` file.
+* The Supabase project URL and anon key were copied from **Settings → API**.
+
 
 ## 🛠 Tech Stack
 
