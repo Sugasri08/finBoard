@@ -37,24 +37,24 @@
 
 :root[data-theme="light"],
 body[data-theme="light"] {
-  --color-fin-bg: #ffffff;
-  --color-fin-surface: #f7f3ff;
-  --color-fin-surface-2: #f0e8ff;
-  --color-fin-surface-soft: rgba(139, 92, 246, 0.03);
-  --color-fin-border: #e4daf7;
-  --color-fin-border-strong: #d2c2ef;
-  --color-fin-border-soft: rgba(36, 27, 55, 0.08);
-  --color-fin-border-hover-soft: rgba(139, 92, 246, 0.18);
-  --color-fin-text: #241b37;
-  --color-fin-muted: #6c6484;
-  --color-fin-accent: #8b5cf6;
-  --color-fin-accent-strong: #a78bfa;
+  --color-fin-bg: #fdfdfd;
+  --color-fin-surface: #ffffff;
+  --color-fin-surface-2: #f5f5f5;
+  --color-fin-surface-soft: rgba(255, 107, 0, 0.03);
+  --color-fin-border: #eaeaea;
+  --color-fin-border-strong: #d4d4d4;
+  --color-fin-border-soft: rgba(0, 0, 0, 0.08);
+  --color-fin-border-hover-soft: rgba(255, 107, 0, 0.18);
+  --color-fin-text: #171717;
+  --color-fin-muted: #666666;
+  --color-fin-accent: #FF6B00;
+  --color-fin-accent-strong: #FF8C00;
   --color-fin-border-hover: var(--color-fin-accent);
-  --color-fin-accent-soft: rgba(139, 92, 246, 0.12);
-  --color-fin-accent-rgb: 139, 92, 246;
-  --color-fin-shadow: rgba(139, 92, 246, 0.12);
-  --color-fin-shadow-accent: rgba(139, 92, 246, 0.2);
-  --color-fin-bg-elevated: #fbf8ff;
+  --color-fin-accent-soft: rgba(255, 107, 0, 0.12);
+  --color-fin-accent-rgb: 255, 107, 0;
+  --color-fin-shadow: rgba(0, 0, 0, 0.08);
+  --color-fin-shadow-accent: rgba(255, 107, 0, 0.2);
+  --color-fin-bg-elevated: #ffffff;
   --color-fin-text-inverse: #ffffff;
 }
 
@@ -76,10 +76,10 @@ body {
 
 body[data-theme="light"] {
   background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(var(--color-fin-accent-rgb), 0.12) 0%, transparent 52%),
-    radial-gradient(ellipse at 80% 80%, rgba(var(--color-fin-accent-rgb), 0.08) 0%, transparent 52%),
-    linear-gradient(rgba(139, 92, 246, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 92, 246, 0.06) 1px, transparent 1px);
+    radial-gradient(ellipse at 20% 20%, rgba(var(--color-fin-accent-rgb), 0.05) 0%, transparent 52%),
+    radial-gradient(ellipse at 80% 80%, rgba(var(--color-fin-accent-rgb), 0.03) 0%, transparent 52%),
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
 
 button,
@@ -192,8 +192,7 @@ body[data-theme="light"] .auth-social-btn {
 body[data-theme="light"] .theme-panel-strong,
 body[data-theme="light"] .theme-sidebar,
 body[data-theme="light"] .theme-header,
-body[data-theme="light"] .profile-dropdown,
-body[data-theme="light"] .auth-card {
+body[data-theme="light"] .profile-dropdown {
   background-color: var(--color-fin-bg) !important;
 }
 
@@ -216,13 +215,7 @@ body[data-theme="light"] .fin-section-title {
   color: var(--color-fin-accent) !important;
 }
 
-body[data-theme="light"] .auth-logo {
-  background: linear-gradient(135deg, var(--color-fin-text) 0%, var(--color-fin-muted) 100%) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05)) !important;
-}
+/* body[data-theme="light"] .auth-logo override removed to keep the orange branding */
 
 body[data-theme="light"] .theme-accent-bg,
 body[data-theme="light"] .retro-btn,
@@ -263,11 +256,11 @@ body[data-theme="light"] .theme-overlay-card {
 }
 
 body[data-theme="light"] ::-webkit-scrollbar-track {
-  background: #efe9fb;
+  background: #f1f1f1;
 }
 
 body[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #c7b5f3;
+  background: #d4d4d4;
 }
 
 body[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
@@ -282,12 +275,12 @@ body[data-theme="light"] .profile-avatar {
 }
 
 body[data-theme="light"] .profile-trigger {
-  background: rgba(139, 92, 246, 0.05);
+  background: rgba(var(--color-fin-accent-rgb), 0.05);
 }
 
 body[data-theme="light"] .profile-trigger:hover {
-  border-color: rgba(139, 92, 246, 0.3);
-  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(var(--color-fin-accent-rgb), 0.3);
+  background: rgba(var(--color-fin-accent-rgb), 0.1);
 }
 
 body[data-theme="light"] .profile-name {
@@ -295,11 +288,11 @@ body[data-theme="light"] .profile-name {
 }
 
 body[data-theme="light"] .profile-dropdown {
-  background: linear-gradient(145deg, #f7f3ff 0%, #f0e8ff 100%);
+  background: var(--color-fin-surface);
   border: 1px solid var(--color-fin-border);
   box-shadow:
-    0 16px 48px rgba(139, 92, 246, 0.12),
-    0 0 0 1px rgba(139, 92, 246, 0.08);
+    0 16px 48px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
 }
 
 body[data-theme="light"] .profile-dropdown::before {
@@ -329,7 +322,7 @@ body[data-theme="light"] .profile-dropdown-item {
 }
 
 body[data-theme="light"] .profile-dropdown-item:hover {
-  background: rgba(139, 92, 246, 0.08);
+  background: rgba(var(--color-fin-accent-rgb), 0.08);
   color: var(--color-fin-text);
 }
 
@@ -349,7 +342,7 @@ body[data-theme="light"] select:focus,
 body[data-theme="light"] textarea:focus {
   background-color: white !important;
   border-color: var(--color-fin-accent) !important;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(var(--color-fin-accent-rgb), 0.1) !important;
 }
 
 body[data-theme="light"] input::placeholder,
@@ -429,13 +422,13 @@ body[data-theme="light"] .text-zinc-600 {
 
 /* Fix: Progress bar background in light mode */
 body[data-theme="light"] div.bg-zinc-900 {
-  background-color: #e5ddf7 !important;
-  border-color: #d2c2ef !important;
+  background-color: #e5e5e5 !important;
+  border-color: #d4d4d4 !important;
 }
 
 /* Fix: Scrollbar color in light mode */
 body[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: #d2c2ef !important;
+  background: #d4d4d4 !important;
 }
 
 .fin-card {
@@ -579,7 +572,7 @@ body[data-theme="light"] ::-webkit-scrollbar-thumb {
   padding: 1.5rem;
   position: relative;
   overflow: hidden;
-  background: #060606;
+  background: var(--color-fin-bg);
 }
 
 /* Decorative glow blobs */
@@ -722,7 +715,7 @@ body[data-theme="light"] ::-webkit-scrollbar-thumb {
   background: transparent;
   border: none;
   outline: none;
-  color: #f0f0f0;
+  color: var(--color-fin-text);
   font-size: 0.9rem;
   padding: 0.65rem 0;
   font-family: inherit;
