@@ -16,32 +16,52 @@
 
 ---
 
+## 📌 Table of Contents
+
+1. [Features](#-features)  
+2. [Privacy First](#-privacy-first)  
+3. [Getting Started](#-getting-started)  
+4. [Local Development Setup](#-local-development-setup)  
+5. [Project Structure](#-project-structure)  
+6. [Tech Stack](#-tech-stack)  
+7. [Contributing](#-contributing)  
+8. [License](#-license)
+
+---
+
 ## <p align="center"><strong>A retro-themed personal finance dashboard for budgeting, transaction tracking, and financial insights.</strong></p>
 
 ## ✨ Features
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="src/assets/picture2.png" alt="Budget Management" width="100%"><br>
+      <img src="src/assets/picture1.png" alt="Interactive Dashboard" width="100%"><br>
       <b>📊 Interactive Dashboard</b><br>
       <sub>Monitor your financial health at a glance with powerful real-time visualizations.</sub>
     </td>
     <td align="center" width="50%">
-      <img src="src/assets/picture3.png" alt="Transaction History" width="100%"><br>
+      <img src="src/assets/picture2.png" alt="Budget Management" width="100%"><br>
       <b>💰 Budget Management</b><br>
       <sub>Set limits, track expenses per category, and work toward financial goals.</sub>
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <img src="src/assets/picture4.png" alt="Financial Insights" width="100%"><br>
+      <img src="src/assets/picture3.png" alt="Transaction History" width="100%"><br>
       <b>📜 Transaction History</b><br>
       <sub>Search, filter, and categorize transactions with complete visibility.</sub>
     </td>
     <td align="center" width="50%">
-      <img src="src/assets/picture5.png" alt="Secure Local Data" width="100%"><br>
+      <img src="src/assets/picture4.png" alt="Financial Insights" width="100%"><br>
       <b>🧠 Smart Insights</b><br>
       <sub>Identify spending patterns, income trends, and top categories over time.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan=2>
+      <img src="src/assets/picture5.png" alt="Secure Local Data" width="50%"><br>
+      <b>⚙️ Finance Settings</b><br>
+      <sub>Manage transactions, CSV upload, currency, and data reset options.</sub>
     </td>
   </tr>
 </table>
@@ -87,6 +107,7 @@ Open:
 ```text
 http://localhost:5173
 ```
+---
 ## 🔧 Local Development Setup
 
 FinBoard uses Supabase for authentication and data storage.
@@ -103,6 +124,43 @@ Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY
 
 make sure you have completed the Supabase setup steps and created the required `.env` file.
 
+---
+## 📁 Project Structure
+
+A modular React-based structure with clear separation of UI components, pages, state management, and utilities.
+
+```
+FINBOARD/
+├── src/
+│   ├── assets/              # Static images and icons
+│   ├── components/          # Reusable UI components
+│   ├── context/             # Global state management (React Context)
+│   ├── data/                # Static/mock data
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Utilities, API config, helpers
+│   ├── pages/              # Application pages/routes
+│   │   ├── Budgets.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── Goals.jsx
+│   │   ├── InsightsDashboard.jsx
+│   │   ├── Settings.jsx
+│   │   └── Transaction.jsx
+│   ├── App.jsx             # Main app routing
+│   └── main.jsx            # Entry point
+│
+├── test/                   # Unit / utility tests
+│
+├── package.json            # Project dependencies & scripts
+├── vite.config.js          # Vite configuration
+├── index.html              # App root HTML
+├── netlify.toml            # Deployment config
+├── docker-compose.yml      # Docker support
+├── Dockerfile.*            # Docker build configs
+├── .env.example            # Environment variables template
+├── README.md
+└── LICENSE
+```
+---
 
 ## 🛠 Tech Stack
 
