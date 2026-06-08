@@ -186,7 +186,7 @@ export function AppContext({ children }) {
         
         const parsed = Number(t.Amount);
         if (!isNaN(parsed)) {
-          convertedAmt = (parsed * conversionRate).toFixed(2);
+          convertedAmt = parsed * conversionRate;
         }
       }
 
