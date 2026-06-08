@@ -473,7 +473,7 @@ export default function Transaction() {
                 >
                   {Number(data.Amount) > 0 ? "+" : ""}
                   {data.Currency?.symbol || currency.symbol}
-                  {Math.abs(Number(data.Amount)).toLocaleString()}
+                  {Math.abs(Number(data.Amount)).toFixed(2)}
                 </td>
                 <td className="py-4 px-6">
                   <span className="bg-[#1F1F1F] text-gray-300 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-sm border border-[#2a2a2a] flex items-center gap-2 w-fit">
