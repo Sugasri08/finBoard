@@ -1,7 +1,7 @@
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { useContext, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { DataContext } from "../context/AppContext";
+import { DataContext } from "../context/DataContext";
 import { supabase } from "../lib/supabaseClient";
 import { User, Mail, Calendar, TrendingUp, TrendingDown, PiggyBank, Receipt, Pencil, Check, X, Camera, Download, LogOut, Target } from "lucide-react"; export default function Profile() {
     const { user, signOut } = useAuth();
